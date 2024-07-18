@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="fileset" basedir="." default="init">
+
+    <target name="init" depends="deleteConfigFiles,copyConfigFiles"/>
+
+    <patternset id="configPattern">
+        <include name="**/*.properties"/>
+        <include name="**/*.json"/>
+        <include name="**/*.xml"/>
+    </patternset>
+
+    <target name="deleteConfigFiles">
+        <delete file="build/classes/conf">
+            <fileset dir="build/classes/conf">
+                <patternset refid="configPattern"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="copyConfigFiles">
+        <copy todir="build/classes/conf">
+            <fileset dir="src">
+                <patternset refid="configPattern"/>
+            </fileset>
+        </copy>
+    </target>
+</project>
